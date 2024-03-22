@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,6 +26,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isFirst = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Timer(const Duration(seconds: 4), () {
+      reload();
+    });
+  }
+
+  void reload(){
+    setState(() {
+      isFirst = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +72,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 200,
                 width: 200,
               ),
-              crossFadeState: CrossFadeState.showSecond,
+              crossFadeState: isFirst
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
               duration: const Duration(seconds: 2),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 50,
+              width: 150,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                onPressed: () {
+                  setState(() {});
+                },
+                child: const Text(
+                  'Animate',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
