@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool isFirst = true;
 
-  @override
+  /*@override
   void initState() {
     super.initState();
 
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       isFirst = false;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               secondChild: Image.asset(
                 'assets/images/saving.png',
-                height: 200,
-                width: 200,
+                height: 100,
+                width: 100,
               ),
+              sizeCurve: Curves.fastOutSlowIn,
+              //firstCurve: Curves.easeInOut,
+              //secondCurve: Curves.bounceInOut,
               crossFadeState: isFirst
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
@@ -86,7 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    if(isFirst){
+                      isFirst = false;
+                    }else{
+                      isFirst = true;
+                    }
+                  });
                 },
                 child: const Text(
                   'Animate',
