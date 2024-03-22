@@ -38,12 +38,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Flutter Animated Cross Fade Widget',
+            AnimatedCrossFade(
+              firstChild: Image.asset(
+                'assets/images/money.png',
+                width: 200,
+                height: 200,
+              ),
+              secondChild: Image.asset(
+                'assets/images/saving.png',
+                height: 200,
+                width: 200,
+              ),
+              crossFadeState: CrossFadeState.showSecond,
+              duration: const Duration(seconds: 2),
             ),
           ],
         ),
